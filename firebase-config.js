@@ -1,5 +1,4 @@
 // Angels Estética Animal - Firebase Config
-
 window.firebaseEnabled = true;
 
 window.firebaseConfig = {

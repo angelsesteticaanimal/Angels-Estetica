@@ -1,3 +1,3 @@
-Angels Estética Animal V8 Firebase Leve
+Angels Estética Animal V9 Firebase Corrigida
 
-Versão leve: o index.html não tem base64 gigante. Envie todos os arquivos para o GitHub e gere o APK pelo Actions.
+CSS embutido no index para evitar tela crua. Imagens em assets. Firebase ativado.
