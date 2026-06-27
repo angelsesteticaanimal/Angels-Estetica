@@ -28,6 +28,13 @@ jobs:
       - name: Instalar dependências
         run: npm install && npm install -D typescript
 
+      - name: Preparar pasta web
+        run: |
+          mkdir -p www
+          cp index.html www/
+          cp manifest.json www/ || true
+          cp -r assets www/assets || true
+          
       - name: Criar projeto Android
         run: npx cap add android
 
