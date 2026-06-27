@@ -1,3 +1,3 @@
-Angels Estética Animal V9 Firebase Corrigida
+Angels Estética Animal V10 Firebase Único
 
-CSS embutido no index para evitar tela crua. Imagens em assets. Firebase ativado.
+Versão sem dependência de imagens, app.js ou css separados. Envie todos os arquivos no GitHub e gere o APK.
