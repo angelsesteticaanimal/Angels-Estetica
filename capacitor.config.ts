@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.angels.esteticaanimal',
   appName: 'Angels Estética Animal',
-  webDir: '.',
+  webDir: 'www',
   bundledWebRuntime: false
 };
 
