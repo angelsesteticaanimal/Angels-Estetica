@@ -1,6 +1,6 @@
 {
   "name": "angels-estetica-animal",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "App de agendamento Angels Estética Animal.",
   "dependencies": {
     "@capacitor/android": "latest",
