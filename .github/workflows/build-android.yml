@@ -26,7 +26,7 @@ jobs:
           java-version: 17
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install && npm install -D typescript
 
       - name: Criar projeto Android
         run: npx cap add android
