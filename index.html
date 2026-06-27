@@ -47,7 +47,7 @@ async function initFirebase(){
   }
 }
 function listenBookings(){
-  db.collection("agendamentos").orderBy("data").orderBy("hora").onSnapshot(snapshot=>{
+  db.collection("agendamentos").onSnapshot(snapshot=>{
     const items=[]; snapshot.forEach(doc=>items.push({id:doc.id,...doc.data()})); renderItems(items);
   }, error=>{
     console.error(error);
