@@ -1,9 +1,6 @@
-Angels Estética Animal V12.2.3 - WhatsApp e Calendário Corrigidos
+Angels Estética Animal V12.2.4 - Aviso de Domínio Mobile
 
-Correções:
-- Botão destacado: Enviar agenda do dia pelo WhatsApp.
-- Imagem cãozinho/gatinho embutida para não quebrar no site.
-- Calendário automático com todos os dias do mês atual.
-- Dia atual marcado automaticamente.
-- Ajuste de largura no site e no mobile.
-- Mantém botões e cards clicáveis.
+Adicionado:
+- Aviso no topo mobile: Domínio .com.br vence em 28/06/2027.
+- Pequeno badge no desktop com a mesma informação.
+- Mantém V12.2.3 com WhatsApp, calendário automático e imagem corrigida.
