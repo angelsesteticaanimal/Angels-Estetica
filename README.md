@@ -1,10 +1,13 @@
-Angels Estética Animal V11.2 corrigida
+Angels Estética Animal V12.1 - Mobile Corrigida
 
-/index.html = painel administrativo
-/cliente.html = formulário do cliente
-/site/index.html = site institucional
+Correções:
+- Botões compactos no celular
+- Cards sem texto cortado
+- Layout mobile mais organizado
+- Mantém painel premium no computador
+- Mantém Firebase e formulário do cliente
 
-Links:
-https://angelsesteticaanimal.github.io/Angels-Estetica/index.html
-https://angelsesteticaanimal.github.io/Angels-Estetica/cliente.html
-https://angelsesteticaanimal.github.io/Angels-Estetica/site/
+Estrutura:
+index.html = painel premium
+cliente.html = formulário do cliente
+site/index.html = site premium
