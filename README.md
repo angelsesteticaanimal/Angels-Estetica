@@ -1,9 +1,11 @@
-Angels Estética Animal V12.2.1 - Workflow Corrigido
+Angels Estética Animal V12.2.2 - Imagem e Data Corrigidas
 
-Correção:
-- Corrigido o erro do GitHub Actions no passo "Salvar APK gerado".
-- O artifact agora usa:
-  path: android/app/build/outputs/apk/debug/*.apk
+Correções:
+- Banner do cãozinho/gatinho sem cortar no mobile.
+- Site com largura ajustada para não cortar a tela no computador.
+- Calendário marca automaticamente o dia atual.
+- Mantém botões e cards clicáveis.
+- Mantém workflow corrigido para gerar APK.
 
 Estrutura:
 index.html = painel premium
