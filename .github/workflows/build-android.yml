@@ -29,6 +29,7 @@ jobs:
           cp manifest.json www/ || true
           cp icon-192.png www/ || true
           cp icon-512.png www/ || true
+          cp hero-pets.jpg www/ || true
       - name: Criar projeto Android
         run: npx cap add android
       - name: Sincronizar arquivos do app
@@ -40,5 +41,4 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-1-Mobile-Corrigida-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: Angels-Estetica-Animal-V12-2-Premium-Corrigida-APKndroid/app/build/outputs/apk/debug/app-debug.apk
