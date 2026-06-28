@@ -57,6 +57,6 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-2-3-WhatsApp-Calendario-Corrigido-APK
+          name: Angels-Estetica-Animal-V12-2-4-Dominio-Mobile-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
