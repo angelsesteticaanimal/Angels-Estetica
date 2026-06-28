@@ -1,6 +1,6 @@
 {
   "name": "angels-estetica-animal",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "dependencies": {
     "@capacitor/android": "latest",
     "@capacitor/cli": "latest",

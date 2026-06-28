@@ -1,3 +1,3 @@
-Angels Estética Animal V10 Firebase Único
+Angels Estética Animal V11 - Logo + WhatsApp do Dia
 
-Versão sem dependência de imagens, app.js ou css separados. Envie todos os arquivos no GitHub e gere o APK.
+Inclui logo embutida, Firebase, painel web, link do cliente e botão para enviar agenda de hoje pelo WhatsApp.
