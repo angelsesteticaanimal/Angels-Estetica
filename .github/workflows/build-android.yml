@@ -57,6 +57,6 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-2-1-Workflow-Corrigido-APK
+          name: Angels-Estetica-Animal-V12-2-2-Imagem-Data-Corrigida-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
