@@ -1,13 +1,9 @@
-Angels Estética Animal V12.2.2 - Imagem e Data Corrigidas
+Angels Estética Animal V12.2.3 - WhatsApp e Calendário Corrigidos
 
 Correções:
-- Banner do cãozinho/gatinho sem cortar no mobile.
-- Site com largura ajustada para não cortar a tela no computador.
-- Calendário marca automaticamente o dia atual.
+- Botão destacado: Enviar agenda do dia pelo WhatsApp.
+- Imagem cãozinho/gatinho embutida para não quebrar no site.
+- Calendário automático com todos os dias do mês atual.
+- Dia atual marcado automaticamente.
+- Ajuste de largura no site e no mobile.
 - Mantém botões e cards clicáveis.
-- Mantém workflow corrigido para gerar APK.
-
-Estrutura:
-index.html = painel premium
-cliente.html = formulário cliente
-site/index.html = site premium
