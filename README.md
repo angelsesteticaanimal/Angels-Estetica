@@ -1,3 +1,11 @@
-Angels Estética Animal V11 - Logo + WhatsApp do Dia
+# Site institucional Angels Estética Animal
 
-Inclui logo embutida, Firebase, painel web, link do cliente e botão para enviar agenda de hoje pelo WhatsApp.
+Envie a pasta `site` para o mesmo repositório do GitHub Pages.
+
+Depois o site abrirá em:
+
+https://angelsesteticaanimal.github.io/Angels-Estetica/site/
+
+O botão de agendamento aponta para:
+
+../cliente.html
