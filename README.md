@@ -1,9 +1,7 @@
-Angels Estética Animal V12.3.9 - Mídias com debug direto
+Angels Estética Animal V12.4.0 - Debug externo de mídias
 
-Correções:
-- Botões diretos e visíveis para testar Firebase.
-- Publicar foto direto sem depender da prévia.
-- Publicar louvor direto.
-- Publicar vídeo direto.
-- Console de resultado na própria tela.
-- Meta tags para reduzir cache do navegador.
+Correção:
+- Botões de teste/publicação agora usam um arquivo JS externo independente.
+- Se scripts antigos do painel derem erro, os botões de mídia ainda devem funcionar.
+- Mensagem inicial muda para "Botões de mídia carregados".
+- Botões têm IDs próprios e não dependem de onclick antigo.

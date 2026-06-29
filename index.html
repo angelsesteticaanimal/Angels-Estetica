@@ -716,13 +716,15 @@ html, body { max-width:100%; overflow-x:hidden; }
 </section>
 
 
+
 <div class="midiaActionRow">
-  <button onclick="midiaTesteDireto()">🧪 Testar Firebase agora</button>
-  <button onclick="publicarFotoDireto()">📸 Publicar foto direto</button>
-  <button onclick="publicarLouvorDireto()">🎵 Publicar louvor direto</button>
-  <button onclick="publicarVideoDireto()">🎥 Publicar vídeo direto</button>
+  <button id="btnMidiaTeste" type="button">🧪 Testar Firebase agora</button>
+  <button id="btnFotoDireta" type="button">📸 Publicar foto direto</button>
+  <button id="btnLouvorDireto" type="button">🎵 Publicar louvor direto</button>
+  <button id="btnVideoDireto" type="button">🎥 Publicar vídeo direto</button>
 </div>
 <div id="midiaConsole">Aguardando teste das mídias...</div>
+
 
 <details id="rulesHelpMidias" class="rulesHelp">
   <summary>⚠️ Fotos, vídeos ou louvores não carregaram? Clique aqui para ver as regras do Firebase</summary>
@@ -1254,4 +1256,5 @@ async function setDeliveryStatus(id, statusBusca){
 }
 
 initFirebaseV1225();
-</script></body></html>
+</script><script src="midias-debug-v1240.js?v=1240"></script>
+</body></html>
