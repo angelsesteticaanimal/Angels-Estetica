@@ -462,6 +462,13 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
   background:#000;
 }
 
+/* V12.4.6 - Drive e Instagram/Reels */
+.externalMediaCard{width:100%;min-height:220px;display:grid;place-items:center;text-align:center;padding:24px;background:radial-gradient(circle at top,#2a1720,#130f14);color:#fff}
+.externalMediaCard .bigIcon{font-size:56px;margin-bottom:10px}.externalMediaCard b{display:block;font-size:22px;margin-bottom:8px}.externalMediaCard p{opacity:.82;line-height:1.45}
+.instagramFolderGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-top:16px}.instagramReelCard{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px}
+.instagramReelCard .igIcon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#fff0f6,#fff3df);font-size:28px;margin-bottom:10px}.instagramReelCard h4{margin:0 0 8px}.instagramReelCard p{margin:0 0 12px;color:var(--muted);font-size:14px}
+@media(max-width:850px){.instagramFolderGrid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -1486,5 +1493,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 </script>
 
+<details class="mediaFolder" id="pasta-instagram-reels">
+  <summary>📱 Abrir pasta Instagram / Reels</summary>
+  <div class="folderInner">
+    <p class="muted">Reels e links do Instagram cadastrados no painel aparecem aqui. Por regra do Instagram, alguns links abrem fora do site.</p>
+    <div id="instagramReelsGrid" class="instagramFolderGrid"></div>
+  </div>
+</details>
+
+<script>
+/* V12.4.6 - YouTube, Google Drive e Instagram/Reels */
+function mediaKindFromLink(link){const s=String(link||'').toLowerCase();if(s.includes('youtube.com')||s.includes('youtu.be'))return'youtube';if(s.includes('drive.google.com'))return'drive';if(s.includes('instagram.com'))return'instagram';if(s.match(/\.mp4(\?|$)/))return'mp4';return'external'}
+function extractYouTubeIdV1246(url){try{const raw=String(url||'').trim().replace(/&amp;/g,'&');let m=raw.match(/[?&]v=([^&]+)/);if(m&&m[1])return m[1].split('?')[0].split('&')[0];m=raw.match(/youtu\.be\/([^?&/]+)/);if(m&&m[1])return m[1];m=raw.match(/youtube\.com\/shorts\/([^?&/]+)/);if(m&&m[1])return m[1];m=raw.match(/youtube\.com\/embed\/([^?&/]+)/);if(m&&m[1])return m[1]}catch(e){}return''}
+function drivePreviewUrl(link){try{const raw=String(link||'').trim();let m=raw.match(/drive\.google\.com\/file\/d\/([^/]+)/);if(m&&m[1])return`https://drive.google.com/file/d/${m[1]}/preview`;m=raw.match(/[?&]id=([^&]+)/);if(m&&m[1])return`https://drive.google.com/file/d/${m[1]}/preview`}catch(e){}return''}
+function mediaIframeHtml(item,muted=true){const link=item.link||'',kind=mediaKindFromLink(link);if(kind==='youtube'){const id=extractYouTubeIdV1246(link);if(id)return`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&mute=${muted?'1':'0'}&controls=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`}if(kind==='drive'){const src=drivePreviewUrl(link);if(src)return`<iframe src="${src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`}if(kind==='mp4')return`<video src="${link}" autoplay muted controls playsinline></video>`;const icon=kind==='instagram'?'📱':'▶️',label=kind==='instagram'?'Reel do Instagram':'Mídia externa',button=kind==='instagram'?'Assistir no Instagram':'Abrir mídia';return`<div class="externalMediaCard"><div><div class="bigIcon">${icon}</div><b>${item.titulo||label}</b><p>${item.descricao||'Este link pode abrir fora do site.'}</p><button class="btn btnPink" onclick="window.open('${link}','_blank')">${button}</button></div></div>`}
+function renderAnyMediaInFrame(frameId,item,muted=true){const frame=document.getElementById(frameId);if(!frame||!item)return false;frame.innerHTML=mediaIframeHtml(item,muted);return true}
+if(typeof renderSplitVideo==='function'){renderSplitVideo=function(v){currentSplitVideo=v;const title=document.getElementById('splitVideoTitle'),desc=document.getElementById('splitVideoDesc');if(title)title.textContent=v.titulo||(mediaKindFromLink(v.link)==='instagram'?'Instagram / Reel':'Vídeo Angels');if(desc)desc.textContent=v.descricao||'Mídia cadastrada pela Angels.';renderAnyMediaInFrame('splitVideoFrame',v,true)}}
+if(typeof renderVideo==='function'){renderVideo=function(v){currentVideo=v;const title=document.getElementById('videoTitlePublic'),desc=document.getElementById('videoDescPublic');if(title)title.textContent=v.titulo||'Vídeo Angels';if(desc)desc.textContent=v.descricao||'Mídia cadastrada pela Angels.';renderAnyMediaInFrame('videoFrame',v,true)}}
+function renderInstagramReelsFolder(){try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);const db=firebase.firestore(),grid=document.getElementById('instagramReelsGrid');if(!grid)return;db.collection('videos').limit(50).onSnapshot(snap=>{const reels=[];snap.forEach(doc=>{const item={id:doc.id,...doc.data()};if(mediaKindFromLink(item.link)==='instagram')reels.push(item)});if(!reels.length){grid.innerHTML='<p class="muted">Nenhum Reel do Instagram cadastrado ainda.</p>';return}grid.innerHTML=reels.map(item=>`<div class="instagramReelCard"><div class="igIcon">📱</div><h4>${item.titulo||'Reel Angels'}</h4><p>${item.descricao||'Publicação do Instagram cadastrada pela equipe Angels.'}</p><button class="btn btnPink" onclick="window.open('${item.link}','_blank')">Assistir no Instagram</button></div>`).join('')},err=>{console.error(err);grid.innerHTML='<p class="muted">Não foi possível carregar os Reels.</p>'})}catch(e){console.error(e)}}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(renderInstagramReelsFolder,1200));
+</script>
 </body>
 </html>
