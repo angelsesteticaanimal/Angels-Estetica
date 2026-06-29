@@ -1,5 +1,9 @@
-Angels Estética Animal V12.4.2 - Louvor Playlist Monitor
+Angels Estética Animal V12.4.4 - Playlist diária + layout topo
 
-Remove player flutuante grande e adiciona mini monitor no final do site para playlist de louvores do YouTube.
-Painel salva um link de playlist em config/louvor24h.
-Atualize regras com firebase-rules-v12-4-2.txt.
+Novidades:
+- Painel com textarea para vários links de louvores, um por linha.
+- Site monta ordem diária dos vídeos e toca em sequência.
+- Logo e chamada principal viraram faixa compacta no topo.
+- Monitores de mídia foram trazidos para cima.
+- Galeria e vídeos ficam em pastas recolhidas.
+- Monitor superior tenta tocar playlist diária em autoplay mudo.

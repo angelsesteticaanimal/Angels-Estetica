@@ -162,8 +162,70 @@ function db(){if(typeof firebase==="undefined")throw new Error("Firebase não ca
 function val(id){return(document.getElementById(id)?.value||"").trim()}
 function listId(u){let m=String(u||"").replace(/&amp;/g,"&").match(/[?&]list=([^&]+)/);return m?m[1]:""}
 function vidId(u){let s=String(u||"").replace(/&amp;/g,"&");let m=s.match(/[?&]v=([^&]+)/)||s.match(/youtu\.be\/([^?&/]+)/)||s.match(/youtube\.com\/shorts\/([^?&/]+)/);return m?m[1]:""}
-async function salvar(){try{const link=val("playlistLouvorLink"),titulo=val("playlistLouvorTitulo")||"Louvores Angels 24h";if(!link)throw new Error("Cole um link de playlist ou vídeo.");const l=listId(link),v=vidId(link);if(!l&&!v)throw new Error("Não encontrei ID de playlist ou vídeo.");await db().collection("config").doc("louvor24h").set({titulo,link,listId:l,videoId:v,updatedAt:new Date().toISOString()});msg("✅ Playlist salva. Abra o site público e atualize com Ctrl+F5.","ok")}catch(e){console.error(e);msg("❌ Não salvou: "+(e.message||e),"err")}}
+async function salvar(){try{const link=val("playlistLouvorLink"),titulo=val("playlistLouvorTitulo")||"Louvores Angels 24h";if(!link)throw new Error("Cole um link de playlist ou vídeo.");const l=listId(link),v=vidId(link);if(!l&&!v)throw new Error("Não encontrei ID de playlist ou vídeo.");const volume = Math.max(1, Math.min(30, parseInt(document.getElementById("playlistLouvorVolume")?.value || "12", 10))); await db().collection("config").doc("louvor24h").set({titulo,link,listId:l,videoId:v,volume,updatedAt:new Date().toISOString()});msg("✅ Playlist salva. Abra o site público e atualize com Ctrl+F5.","ok")}catch(e){console.error(e);msg("❌ Não salvou: "+(e.message||e),"err")}}
 function testar(){const link=val("playlistLouvorLink"),l=listId(link),v=vidId(link);let url=l?"https://www.youtube.com/embed/videoseries?list="+encodeURIComponent(l)+"&autoplay=1&mute=1&loop=1&controls=1&rel=0&playsinline=1":v?"https://www.youtube.com/embed/"+encodeURIComponent(v)+"?autoplay=1&mute=1&controls=1&rel=0&playsinline=1":"";if(url)window.open(url,"_blank");else msg("Cole um link válido para testar.","err")}
 function bind(){let a=document.getElementById("btnSalvarPlaylistLouvor"),b=document.getElementById("btnTestarPlaylistLouvor");if(a)a.onclick=salvar;if(b)b.onclick=testar}
 document.readyState==="loading"?document.addEventListener("DOMContentLoaded",bind):bind()
+})();
+
+
+/* V12.4.4 - Salvar playlist diária com vários links */
+(function(){
+  function extractVideoIdAny(url){
+    try{
+      const raw = String(url || "").trim().replace(/&amp;/g,"&");
+      let m = raw.match(/[?&]v=([^&]+)/);
+      if(m && m[1]) return m[1].split("?")[0].split("&")[0];
+      m = raw.match(/youtu\.be\/([^?&/]+)/);
+      if(m && m[1]) return m[1];
+      m = raw.match(/youtube\.com\/shorts\/([^?&/]+)/);
+      if(m && m[1]) return m[1];
+      m = raw.match(/youtube\.com\/embed\/([^?&/]+)/);
+      if(m && m[1]) return m[1];
+    }catch(e){}
+    return "";
+  }
+
+  function patchSalvarPlaylist(){
+    const btn = document.getElementById("btnSalvarPlaylistLouvor");
+    if(!btn || btn.dataset.v1244) return;
+    btn.dataset.v1244 = "1";
+    const oldClick = btn.onclick;
+    btn.onclick = async function(){
+      try{
+        const textarea = document.getElementById("playlistLinksDiarios");
+        const linhas = (textarea?.value || "").split(/\n+/).map(x=>x.trim()).filter(Boolean);
+        const ids = linhas.map(extractVideoIdAny).filter(Boolean);
+
+        const link = (document.getElementById("playlistLouvorLink")?.value || "").trim();
+        const titulo = (document.getElementById("playlistLouvorTitulo")?.value || "Louvores Angels 24h").trim();
+        const volume = Math.max(1, Math.min(30, parseInt(document.getElementById("playlistLouvorVolume")?.value || "12",10)));
+
+        if(ids.length){
+          if(typeof firebase === "undefined") throw new Error("Firebase não carregou.");
+          if(!firebase.apps.length) firebase.initializeApp(firebaseConfigMidias || firebaseConfig);
+          await firebase.firestore().collection("config").doc("louvor24h").set({
+            titulo,
+            link: link || linhas[0],
+            videoIds: ids,
+            volume,
+            modo: "playlist_diaria",
+            updatedAt: new Date().toISOString()
+          });
+          const msg = document.getElementById("playlistMsg");
+          if(msg){ msg.className = "ok"; msg.textContent = "✅ Playlist diária salva com " + ids.length + " vídeos."; }
+          return;
+        }
+
+        if(oldClick) return oldClick.call(this);
+      }catch(e){
+        console.error(e);
+        const msg = document.getElementById("playlistMsg");
+        if(msg){ msg.className = "err"; msg.textContent = "❌ Não salvou: " + (e.message || e); }
+      }
+    };
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", patchSalvarPlaylist);
+  else patchSalvarPlaylist();
 })();
