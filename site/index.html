@@ -911,5 +911,112 @@ if(typeof ambientLouvores!=='undefined'){dbFix.collection('louvores').limit(50).
 document.addEventListener('DOMContentLoaded',()=>setTimeout(reloadPublicMediaNoOrder,1200));
 </script>
 
+
+<script>
+/* V12.4.1 - Correção YouTube autoplay/playlist/shorts */
+function angelsYoutubeId(url){
+  if(!url) return '';
+  try{
+    let raw = String(url).trim().replace(/&amp;/g,'&');
+    let m = raw.match(/[?&]v=([^&]+)/);
+    if(m && m[1]) return m[1].split('?')[0].split('&')[0];
+    m = raw.match(/youtu\.be\/([^?&/]+)/);
+    if(m && m[1]) return m[1];
+    m = raw.match(/youtube\.com\/shorts\/([^?&/]+)/);
+    if(m && m[1]) return m[1];
+    m = raw.match(/youtube\.com\/embed\/([^?&/]+)/);
+    if(m && m[1]) return m[1];
+    const u = new URL(raw);
+    if(u.searchParams.get('v')) return u.searchParams.get('v');
+    if(u.hostname.includes('youtu.be')) return u.pathname.replace('/','').split('/')[0];
+    if(u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('/')[0];
+    if(u.pathname.includes('/embed/')) return u.pathname.split('/embed/')[1].split('/')[0];
+  }catch(e){}
+  return '';
+}
+function angelsYoutubeEmbed(url, muted=true){
+  const id = angelsYoutubeId(url);
+  if(!id) return '';
+  return `https://www.youtube.com/embed/${id}?autoplay=1&mute=${muted?'1':'0'}&controls=1&rel=0&playsinline=1&enablejsapi=1`;
+}
+function renderYoutubeFrameInto(frame, item, muted=true){
+  if(!frame || !item) return false;
+  const src = angelsYoutubeEmbed(item.link || '', muted);
+  if(!src) return false;
+  frame.innerHTML = `<iframe src="${src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  return true;
+}
+if(typeof renderSplitVideo === 'function'){
+  renderSplitVideo = function(v){
+    currentSplitVideo = v;
+    const frame = document.getElementById('splitVideoFrame');
+    const title = document.getElementById('splitVideoTitle');
+    const desc = document.getElementById('splitVideoDesc');
+    if(title) title.textContent = v.titulo || 'Vídeo Angels';
+    if(desc) desc.textContent = v.descricao || 'Publicação em vídeo da Angels.';
+    if(renderYoutubeFrameInto(frame, v, true)) return;
+    const mp4 = /\.mp4(\?|$)/i.test(v.link || '');
+    if(mp4) frame.innerHTML = `<video src="${v.link}" autoplay muted controls playsinline></video>`;
+    else frame.innerHTML = `<div class="videoFallback"><div class="playIcon">▶️</div><b>${v.titulo || 'Vídeo Angels'}</b><p>Este link pode abrir fora do site.</p><button class="btn btnPink" onclick="openSplitVideo()">Assistir vídeo</button></div>`;
+  };
+}
+if(typeof renderVideo === 'function'){
+  renderVideo = function(v){
+    currentVideo = v;
+    const frame = document.getElementById('videoFrame');
+    const title = document.getElementById('videoTitlePublic');
+    const desc = document.getElementById('videoDescPublic');
+    if(title) title.textContent = v.titulo || 'Vídeo Angels';
+    if(desc) desc.textContent = v.descricao || 'Publicação em vídeo da Angels Estética Animal.';
+    if(renderYoutubeFrameInto(frame, v, true)) return;
+    const mp4 = /\.mp4(\?|$)/i.test(v.link || '');
+    if(mp4) frame.innerHTML = `<video src="${v.link}" autoplay muted controls playsinline></video>`;
+    else frame.innerHTML = `<div class="videoFallback"><div class="playIcon">▶️</div><b>${v.titulo || 'Vídeo Angels'}</b><p>Este link pode abrir fora do site.</p><button class="btn btnPink" onclick="openCurrentVideo()">Assistir vídeo</button></div>`;
+  };
+}
+function playAmbientWithMode(muted){
+  if(!ambientLouvores || !ambientLouvores.length){
+    if(typeof updateAmbientTitle === 'function') updateAmbientTitle();
+    return;
+  }
+  let next = ambientLouvores[Math.floor(Math.random()*ambientLouvores.length)];
+  if(ambientLouvores.length > 1 && currentLouvor && next.id === currentLouvor.id){
+    next = ambientLouvores[Math.floor(Math.random()*ambientLouvores.length)];
+  }
+  currentLouvor = next;
+  if(typeof updateAmbientTitle === 'function') updateAmbientTitle();
+  const frame = document.getElementById('ambientFrame');
+  const src = angelsYoutubeEmbed(next.link || '', muted);
+  if(frame && src){
+    frame.style.display = 'block';
+    frame.innerHTML = `<iframe src="${src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  }
+}
+if(typeof playRandomLouvor === 'function'){
+  playRandomLouvor = function(){ playAmbientWithMode(false); };
+}
+if(typeof activateAmbientMusic === 'function'){
+  activateAmbientMusic = function(){
+    ambientEnabled = true;
+    const btn = document.getElementById('ambientActivateBtn');
+    if(btn) btn.textContent = '✅ Louvor ambiente ativo';
+    if(typeof setAmbientAutoStatus === 'function') setAmbientAutoStatus('✅ Louvor ambiente ativado. Se o navegador permitir, tocará com som.', 'ok');
+    playAmbientWithMode(false);
+    clearInterval(louvorTimer);
+    louvorTimer = setInterval(()=>playAmbientWithMode(false), 240000);
+  };
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(()=>{
+    try{
+      if(typeof ambientLouvores !== 'undefined' && ambientLouvores.length && !ambientEnabled){
+        playAmbientWithMode(true);
+        if(typeof setAmbientAutoStatus === 'function') setAmbientAutoStatus('🔇 Louvor carregado em modo silencioso. Toque em Ativar para liberar o som.', '');
+      }
+    }catch(e){}
+  }, 3500);
+});
+</script>
+
 </body>
 </html>
