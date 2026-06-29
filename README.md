@@ -1,12 +1,12 @@
-Angels Estética Animal V12.3.7 - Louvores automáticos 24h
+Angels Estética Animal V12.3.8 - Correção de mídias e tabela
 
-Novidades:
-- O site tenta iniciar o louvor ambiente automaticamente ao abrir.
-- Mantém lista atualizável pelo painel na coleção louvores.
-- Reprodução aleatória contínua enquanto o site estiver aberto.
-- Se o navegador bloquear áudio automático, aparece orientação para tocar em Ativar/liberar som.
-- Botão de próximo louvor continua disponível.
+Correções:
+- Tabela de solicitações com rolagem horizontal para não invadir o painel da direita.
+- Galeria com prévia da foto antes de publicar.
+- Mensagens de sucesso/erro mais claras em Fotos, Vídeos e Louvores.
+- Carregamento das coleções sem depender de orderBy.
+- Ajuda de regras do Firebase dentro do painel.
+- Botão para testar gravação no Firebase.
 
-Importante:
-Navegadores modernos, principalmente em celular, podem bloquear áudio com som sem interação do usuário.
-Esta versão tenta iniciar automaticamente, mas mantém fallback para liberar o som com um toque.
+Se fotos, vídeos ou louvores não salvarem, atualize as regras do Firestore usando o arquivo:
+firebase-rules-galeria-videos-louvores.txt
