@@ -57,6 +57,6 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-3-7-Louvores-Auto-24H-APK
+          name: Angels-Estetica-Animal-V12-3-8-Corrige-Midias-Tabela-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
