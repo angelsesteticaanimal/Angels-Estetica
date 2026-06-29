@@ -438,6 +438,30 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
   }
 }
 
+
+/* V12.4.5 - Pastas no final e playlist por vídeos */
+#pasta-fotos-site,#pasta-videos-site{
+  max-width:1050px;
+  margin:22px auto;
+}
+.louvorVideoInfo{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:#fff7e6;
+  border:1px solid #f2d79b;
+  color:#7a5200;
+  font-size:13px;
+  font-weight:800;
+}
+.louvorControls .nextLouvorBtn{
+  background:#fff!important;
+}
+.louvorScreenSmall iframe,
+#splitVideoFrame iframe{
+  background:#000;
+}
+
 </style>
 </head>
 <body>
@@ -572,29 +596,21 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
         <div class="step">3. Angels confirma pelo WhatsApp <small>Você recebe retorno da equipe.</small></div>
       </div>
     </div>
-  </section>
-<details class="mediaFolder" id="pasta-videos-site"><summary>🎥 Abrir pasta de vídeos</summary><div class="folderInner">
-
-
-  <section id="videos">
-    <div class="title"><div><h2>Vídeos Angels</h2><p>Veja vídeos, bastidores, banhos, tosas e publicações cadastradas pela equipe.</p></div></div>
-    <div class="videoShowcase">
-      <div id="videoLoadNote" class="firebaseGalleryNote">🔄 Procurando vídeos cadastrados no painel...</div>
-      <div class="videoPlayerBox">
-        <div id="videoFrame" class="videoFrame"><div class="videoFallback"><div class="playIcon">▶️</div><b>Nenhum vídeo carregado ainda</b></div></div>
-        <div class="videoInfo">
-          <h3 id="videoTitlePublic">Vídeos da Angels</h3>
-          <p id="videoDescPublic">Os vídeos cadastrados no painel aparecem aqui em ordem aleatória.</p>
-          <div class="videoControls">
-            <button class="btn btnPink" onclick="nextRandomVideo()">🔀 Próximo vídeo</button>
-            <button class="btn btnLight" onclick="openCurrentVideo()">Abrir vídeo</button>
-          </div>
-          <p style="font-size:13px">A rotação automática troca o vídeo aleatoriamente. YouTube pode tocar embutido; Instagram, TikTok e Drive podem abrir pelo botão.</p>
-        </div>
-      </div>
-      <div id="videoMiniList" class="videoMiniList"></div>
+  </section><div class="cta">
+    <div>
+      <h2>Pronto para cuidar do seu pet?</h2>
+      <p>Solicite seu agendamento online. A equipe Angels confirma pelo WhatsApp.</p>
     </div>
-  </section></div></details>
+    <button class="btn btnLight" onclick="agendar()">Solicitar agendamento</button>
+  </div>
+<section id="louvores24h" class="louvorMiniSection"><div class="louvorMiniCard">
+<div class="louvorMiniHead"><div><h2>🎵 Louvor ambiente 24h</h2><p>Mini monitor com playlist de louvores do YouTube no final do site.</p></div></div>
+<div class="louvorMonitorSmall"><div class="louvorMonitorFrame"><div id="louvorPlaylistScreen" class="louvorScreenSmall"><div style="padding:22px;text-align:center"><b>Carregando playlist de louvores...</b><p style="opacity:.8">Configure a playlist no painel.</p></div></div></div><div class="louvorStandSmall"></div></div>
+<div class="louvorControls"><button class="btn btnPink" onclick="ativarSomPlaylistLouvor()">🔊 Ativar som</button><button class="btn btnLight" onclick="recarregarPlaylistLouvor()">🔄 Recarregar</button><button class="btn btnLight nextLouvorBtn" onclick="proximoLouvorManual()">⏭️ Próximo louvor</button><button class="btn btnLight smallVolBtn" onclick="baixarVolumeLouvor()">🔉 Baixar</button><span id="louvorVolumeBadge" class="louvorVolumeBadge">Volume 12%</span><button class="btn btnLight smallVolBtn" onclick="aumentarVolumeLouvor()">🔊 Aumentar</button><button class="btn btnLight" onclick="abrirPlaylistLouvor()">Abrir YouTube</button></div>
+<div id="louvorPlaylistStatus" class="louvorStatus">Aguardando configuração da playlist...</div><div id="louvorVideoInfo" class="louvorVideoInfo">A lista diária tocará vídeo por vídeo.</div>
+</div></section>
+<div id="pastas-final-v1245">
+
 <details class="mediaFolder" id="pasta-fotos-site"><summary>📸 Abrir pasta de fotos da galeria</summary><div class="folderInner">
 
 
@@ -646,19 +662,32 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
   </section></div></details>
 
 
-  <div class="cta">
-    <div>
-      <h2>Pronto para cuidar do seu pet?</h2>
-      <p>Solicite seu agendamento online. A equipe Angels confirma pelo WhatsApp.</p>
+  
+
+<details class="mediaFolder" id="pasta-videos-site"><summary>🎥 Abrir pasta de vídeos</summary><div class="folderInner">
+
+
+  <section id="videos">
+    <div class="title"><div><h2>Vídeos Angels</h2><p>Veja vídeos, bastidores, banhos, tosas e publicações cadastradas pela equipe.</p></div></div>
+    <div class="videoShowcase">
+      <div id="videoLoadNote" class="firebaseGalleryNote">🔄 Procurando vídeos cadastrados no painel...</div>
+      <div class="videoPlayerBox">
+        <div id="videoFrame" class="videoFrame"><div class="videoFallback"><div class="playIcon">▶️</div><b>Nenhum vídeo carregado ainda</b></div></div>
+        <div class="videoInfo">
+          <h3 id="videoTitlePublic">Vídeos da Angels</h3>
+          <p id="videoDescPublic">Os vídeos cadastrados no painel aparecem aqui em ordem aleatória.</p>
+          <div class="videoControls">
+            <button class="btn btnPink" onclick="nextRandomVideo()">🔀 Próximo vídeo</button>
+            <button class="btn btnLight" onclick="openCurrentVideo()">Abrir vídeo</button>
+          </div>
+          <p style="font-size:13px">A rotação automática troca o vídeo aleatoriamente. YouTube pode tocar embutido; Instagram, TikTok e Drive podem abrir pelo botão.</p>
+        </div>
+      </div>
+      <div id="videoMiniList" class="videoMiniList"></div>
     </div>
-    <button class="btn btnLight" onclick="agendar()">Solicitar agendamento</button>
-  </div>
-<section id="louvores24h" class="louvorMiniSection"><div class="louvorMiniCard">
-<div class="louvorMiniHead"><div><h2>🎵 Louvor ambiente 24h</h2><p>Mini monitor com playlist de louvores do YouTube no final do site.</p></div></div>
-<div class="louvorMonitorSmall"><div class="louvorMonitorFrame"><div id="louvorPlaylistScreen" class="louvorScreenSmall"><div style="padding:22px;text-align:center"><b>Carregando playlist de louvores...</b><p style="opacity:.8">Configure a playlist no painel.</p></div></div></div><div class="louvorStandSmall"></div></div>
-<div class="louvorControls"><button class="btn btnPink" onclick="ativarSomPlaylistLouvor()">🔊 Ativar som</button><button class="btn btnLight" onclick="recarregarPlaylistLouvor()">🔄 Recarregar</button><button class="btn btnLight smallVolBtn" onclick="baixarVolumeLouvor()">🔉 Baixar</button><span id="louvorVolumeBadge" class="louvorVolumeBadge">Volume 12%</span><button class="btn btnLight smallVolBtn" onclick="aumentarVolumeLouvor()">🔊 Aumentar</button><button class="btn btnLight" onclick="abrirPlaylistLouvor()">Abrir YouTube</button></div>
-<div id="louvorPlaylistStatus" class="louvorStatus">Aguardando configuração da playlist...</div>
-</div></section>
+  </section></div></details>
+</div>
+
 </main>
 
 <footer class="footer">
@@ -1324,6 +1353,137 @@ if(typeof loadLouvorPlaylistConfig === 'function'){
     }
   };
 }
+</script>
+
+
+<script>
+/* V12.4.5 - Playlist diária tocando vídeo por vídeo */
+let louvorDailyIds = [];
+let louvorDailyIndex = 0;
+let louvorAutoTimer = null;
+let louvorSomAtivo = false;
+
+function v1245ShuffleByDay(arr){
+  const a = [...(arr || [])];
+  const d = new Date();
+  let seed = Number(String(d.getFullYear()) + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0'));
+  for(let i=a.length-1;i>0;i--){
+    seed = (seed * 9301 + 49297) % 233280;
+    const j = Math.floor((seed / 233280) * (i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function v1245EmbedVideoId(id, mute=true){
+  if(!id) return '';
+  return `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&mute=${mute?'1':'0'}&controls=1&rel=0&playsinline=1&enablejsapi=1`;
+}
+
+function v1245RenderIframe(targetId, videoId, mute=true){
+  const el = document.getElementById(targetId);
+  if(!el || !videoId) return false;
+  el.innerHTML = `<iframe src="${v1245EmbedVideoId(videoId, mute)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  return true;
+}
+
+function v1245AtualizarInfo(){
+  const info = document.getElementById('louvorVideoInfo');
+  if(info){
+    if(louvorDailyIds.length){
+      info.textContent = `Louvor ${louvorDailyIndex + 1} de ${louvorDailyIds.length} na sequência diária.`;
+    }else{
+      info.textContent = 'Cadastre links de louvores no painel para montar a sequência diária.';
+    }
+  }
+}
+
+function tocarLouvorAtual(mute=true){
+  if(!louvorDailyIds.length){
+    louvorStatus('Nenhum vídeo diário cadastrado.');
+    v1245AtualizarInfo();
+    return;
+  }
+  if(louvorDailyIndex >= louvorDailyIds.length) louvorDailyIndex = 0;
+  const id = louvorDailyIds[louvorDailyIndex];
+
+  v1245RenderIframe('louvorPlaylistScreen', id, mute);
+  v1245RenderIframe('splitVideoFrame', id, true);
+
+  const title = document.getElementById('splitVideoTitle');
+  const desc = document.getElementById('splitVideoDesc');
+  if(title) title.textContent = 'Louvores em vídeo';
+  if(desc) desc.textContent = 'Sequência diária automática de louvores.';
+
+  louvorStatus(mute ? '🔇 Tocando louvor sem som. Clique em Ativar som.' : '🔊 Tocando com som baixo se o navegador permitir.');
+  v1245AtualizarInfo();
+}
+
+function proximoLouvorManual(){
+  if(!louvorDailyIds.length) return;
+  louvorDailyIndex = (louvorDailyIndex + 1) % louvorDailyIds.length;
+  tocarLouvorAtual(!louvorSomAtivo);
+}
+
+function iniciarRotacaoLouvor(){
+  clearInterval(louvorAutoTimer);
+  louvorAutoTimer = setInterval(()=>{
+    if(louvorDailyIds.length){
+      louvorDailyIndex = (louvorDailyIndex + 1) % louvorDailyIds.length;
+      tocarLouvorAtual(!louvorSomAtivo);
+    }
+  }, 240000);
+}
+
+ativarSomPlaylistLouvor = function(){
+  louvorSomAtivo = true;
+  tocarLouvorAtual(false);
+};
+
+recarregarPlaylistLouvor = function(){
+  louvorSomAtivo = false;
+  tocarLouvorAtual(true);
+};
+
+abrirPlaylistLouvor = function(){
+  if(louvorPlaylistConfig && louvorPlaylistConfig.link) window.open(louvorPlaylistConfig.link, '_blank');
+  else if(louvorDailyIds.length) window.open('https://www.youtube.com/watch?v=' + louvorDailyIds[louvorDailyIndex], '_blank');
+};
+
+function v1245LoadConfig(){
+  try{
+    if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    firebase.firestore().collection('config').doc('louvor24h').onSnapshot(doc=>{
+      if(doc.exists){
+        louvorPlaylistConfig = doc.data();
+        if(louvorPlaylistConfig.videoIds && louvorPlaylistConfig.videoIds.length){
+          louvorDailyIds = v1245ShuffleByDay(louvorPlaylistConfig.videoIds);
+        }else if(louvorPlaylistConfig.videoId){
+          louvorDailyIds = [louvorPlaylistConfig.videoId];
+        }else{
+          louvorDailyIds = [];
+        }
+        louvorDailyIndex = 0;
+        tocarLouvorAtual(true);
+        iniciarRotacaoLouvor();
+      }else{
+        louvorStatus('Nenhuma playlist diária configurada ainda no painel.');
+        v1245AtualizarInfo();
+      }
+    }, err=>{
+      console.error(err);
+      louvorStatus('Não foi possível carregar a lista diária. Verifique a coleção config.');
+    });
+  }catch(e){
+    console.error(e);
+    louvorStatus('Erro ao carregar lista diária.');
+  }
+}
+
+// Desliga o carregamento antigo por playlist se ele existir e força o novo após abrir.
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(v1245LoadConfig, 900);
+});
 </script>
 
 </body>
