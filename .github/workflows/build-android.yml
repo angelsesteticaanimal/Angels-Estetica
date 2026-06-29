@@ -57,6 +57,6 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-4-2-Louvor-Playlist-Monitor-APK
+          name: Angels-Estetica-Animal-V12-4-4-Playlist-Diaria-Layout-Topo-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
