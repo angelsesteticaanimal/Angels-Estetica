@@ -1,12 +1,9 @@
-Angels Estética Animal V12.3.8 - Correção de mídias e tabela
+Angels Estética Animal V12.3.9 - Mídias com debug direto
 
 Correções:
-- Tabela de solicitações com rolagem horizontal para não invadir o painel da direita.
-- Galeria com prévia da foto antes de publicar.
-- Mensagens de sucesso/erro mais claras em Fotos, Vídeos e Louvores.
-- Carregamento das coleções sem depender de orderBy.
-- Ajuda de regras do Firebase dentro do painel.
-- Botão para testar gravação no Firebase.
-
-Se fotos, vídeos ou louvores não salvarem, atualize as regras do Firestore usando o arquivo:
-firebase-rules-galeria-videos-louvores.txt
+- Botões diretos e visíveis para testar Firebase.
+- Publicar foto direto sem depender da prévia.
+- Publicar louvor direto.
+- Publicar vídeo direto.
+- Console de resultado na própria tela.
+- Meta tags para reduzir cache do navegador.
