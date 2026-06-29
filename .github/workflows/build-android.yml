@@ -57,6 +57,6 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-3-8-Corrige-Midias-Tabela-APK
+          name: Angels-Estetica-Animal-V12-3-9-Midias-Debug-Direto-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
