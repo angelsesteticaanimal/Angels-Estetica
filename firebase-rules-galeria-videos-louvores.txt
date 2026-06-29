@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /agendamentos/{document=**} { allow read, write: if true; }
+    match /galeria/{document=**} { allow read, write: if true; }
+    match /videos/{document=**} { allow read, write: if true; }
+    match /louvores/{document=**} { allow read, write: if true; }
+  }
+}
