@@ -1,9 +1,8 @@
-Angels Estética Animal V12.4.4 - Playlist diária + layout topo
+Angels Estética Animal V12.4.5 - Playlist diária por vídeos
 
-Novidades:
-- Painel com textarea para vários links de louvores, um por linha.
-- Site monta ordem diária dos vídeos e toca em sequência.
-- Logo e chamada principal viraram faixa compacta no topo.
-- Monitores de mídia foram trazidos para cima.
-- Galeria e vídeos ficam em pastas recolhidas.
-- Monitor superior tenta tocar playlist diária em autoplay mudo.
+Correções:
+- Evita erro do player de playlist do YouTube usando vídeo por vídeo.
+- Mini monitor de louvor toca a sequência diária de IDs salvos no painel.
+- Monitor superior também tenta tocar a sequência diária sem som.
+- Botão Próximo louvor.
+- Pastas Fotos e Vídeos movidas para o final do site, abaixo do monitor.
