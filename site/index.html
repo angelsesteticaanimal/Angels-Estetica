@@ -338,6 +338,106 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
 .louvorStandSmall{width:90px;height:18px;margin:-1px auto 0;background:linear-gradient(180deg,#d4ab7b,#8d5f37);border-radius:0 0 18px 18px;position:relative}.louvorStandSmall:after{content:'';position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);width:130px;height:12px;border-radius:999px;background:#7b4e30}
 .louvorControls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.louvorStatus{margin-top:14px;padding:10px 12px;background:#fff7e6;border:1px solid #f2d79b;color:#7a5200;border-radius:14px;font-weight:800;font-size:13px}
 
+
+/* V12.4.3 - Volume baixo para louvor ambiente */
+.louvorVolumeBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#fff7e6;
+  border:1px solid #f2d79b;
+  color:#7a5200;
+  font-weight:900;
+}
+.louvorControls .smallVolBtn{
+  padding:10px 13px;
+}
+
+
+/* V12.4.4 - Topo compacto, monitores acima e galeria em pastas */
+.hero{
+  display:flex!important;
+  align-items:center!important;
+  gap:14px!important;
+  min-height:150px!important;
+  padding:12px 18px!important;
+}
+.hero .logoCard{
+  order:-1!important;
+  width:120px!important;
+  min-width:120px!important;
+  padding:8px!important;
+  border-radius:24px!important;
+  box-shadow:0 10px 24px rgba(117,70,63,.10)!important;
+}
+.hero .logoCard img{
+  width:100%!important;
+  max-height:105px!important;
+  object-fit:contain!important;
+}
+.hero .heroCard{
+  flex:1!important;
+  padding:16px 18px!important;
+  border-radius:26px!important;
+}
+.hero .heroCard h1{
+  font-size:clamp(24px,3.5vw,38px)!important;
+}
+.hero .heroCard p{
+  margin:8px 0 12px!important;
+  font-size:15px!important;
+}
+.hero .pill{
+  margin-bottom:8px!important;
+  padding:7px 12px!important;
+}
+.quick{
+  padding-top:14px!important;
+}
+#midias{
+  padding-top:18px!important;
+}
+.mediaFolder{
+  margin:24px 18px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.mediaFolder summary{
+  cursor:pointer;
+  padding:18px 20px;
+  font-size:22px;
+  font-weight:900;
+  color:var(--brown);
+  background:linear-gradient(135deg,#fff7fb,#fff7ef);
+}
+.mediaFolder .folderInner{
+  padding:0 18px 22px;
+}
+.mediaFolder[open] summary{
+  border-bottom:1px solid var(--line);
+}
+@media(max-width:850px){
+  .hero{
+    min-height:auto!important;
+    align-items:flex-start!important;
+  }
+  .hero .logoCard{
+    width:82px!important;
+    min-width:82px!important;
+  }
+  .hero .logoCard img{
+    max-height:78px!important;
+  }
+  .hero .heroCard{
+    padding:14px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -370,48 +470,10 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
     </div>
   </section>
 
-  <div class="quick">
-    <div class="card"><strong>🛁</strong><span>Banho premium</span></div>
-    <div class="card"><strong>✂️</strong><span>Tosa completa</span></div>
-    <div class="card"><strong>🎾</strong><span>Clubinho pet</span></div>
-    <div class="card"><strong>🚗</strong><span>Busca e entrega</span></div>
-  </div>
-
-  <section id="servicos">
-    <div class="title">
-      <div>
-        <h2>Serviços Angels</h2>
-        <p>Escolha o serviço desejado e abra o formulário já com a opção selecionada.</p>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="card service" onclick="agendar('Banho')"><div class="ico">🛁</div><h3>Banho</h3><p>Higiene completa, carinho e produtos adequados para o seu pet.</p><div class="miniBtn">Agendar banho →</div></div>
-      <div class="card service" onclick="agendar('Tosa')"><div class="ico">✂️</div><h3>Tosa</h3><p>Tosa higiênica, completa ou personalizada com cuidado e segurança.</p><div class="miniBtn">Agendar tosa →</div></div>
-      <div class="card service" onclick="agendar('Banho e Tosa')"><div class="ico">🐾</div><h3>Banho e Tosa</h3><p>Pacote completo para deixar o pet limpo, bonito e confortável.</p><div class="miniBtn">Agendar pacote →</div></div>
-      <div class="card service" onclick="agendar('Hidratação')"><div class="ico">✨</div><h3>Hidratação</h3><p>Cuidado especial para pelos macios, saudáveis e com brilho.</p><div class="miniBtn">Agendar hidratação →</div></div>
-      <div class="card service" onclick="agendar('Clubinho')"><div class="ico">🎾</div><h3>Clubinho</h3><p>Espaço de cuidado, socialização e atenção para seu pet.</p><div class="miniBtn">Conhecer clubinho →</div></div>
-      <div class="card service" onclick="agendar('Busca e entrega')"><div class="ico">🚗</div><h3>Busca e Entrega</h3><p>Mais praticidade para quem precisa de apoio no transporte.</p><div class="miniBtn">Solicitar busca →</div></div>
-    </div>
-  </section>
-
-  <section id="busca">
-    <div class="delivery">
-      <div>
-        <h2>Busca e entrega com localização fixa</h2>
-        <p>O cliente pode enviar endereço, ponto de referência e localização fixa pelo formulário. Assim fica mais fácil buscar e entregar o pet com segurança.</p>
-        <button class="btn btnPink" onclick="agendar('Busca e entrega')">🚗 Solicitar busca e entrega</button>
-      </div>
-      <div class="steps">
-        <div class="step">1. Cliente solicita o agendamento <small>Preenche serviço, data e horário.</small></div>
-        <div class="step">2. Informa endereço ou localização <small>Pode enviar link do Google Maps.</small></div>
-        <div class="step">3. Angels confirma pelo WhatsApp <small>Você recebe retorno da equipe.</small></div>
-      </div>
-    </div>
-  </section>
 
   
 
-  <section id="midias">
+  <section id="midias" data-v1244-moved="1">
     <div class="title">
       <div>
         <h2>Fotos e Vídeos Angels</h2>
@@ -473,6 +535,47 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
   </section>
 
 
+  <div class="quick">
+    <div class="card"><strong>🛁</strong><span>Banho premium</span></div>
+    <div class="card"><strong>✂️</strong><span>Tosa completa</span></div>
+    <div class="card"><strong>🎾</strong><span>Clubinho pet</span></div>
+    <div class="card"><strong>🚗</strong><span>Busca e entrega</span></div>
+  </div>
+
+  <section id="servicos">
+    <div class="title">
+      <div>
+        <h2>Serviços Angels</h2>
+        <p>Escolha o serviço desejado e abra o formulário já com a opção selecionada.</p>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card service" onclick="agendar('Banho')"><div class="ico">🛁</div><h3>Banho</h3><p>Higiene completa, carinho e produtos adequados para o seu pet.</p><div class="miniBtn">Agendar banho →</div></div>
+      <div class="card service" onclick="agendar('Tosa')"><div class="ico">✂️</div><h3>Tosa</h3><p>Tosa higiênica, completa ou personalizada com cuidado e segurança.</p><div class="miniBtn">Agendar tosa →</div></div>
+      <div class="card service" onclick="agendar('Banho e Tosa')"><div class="ico">🐾</div><h3>Banho e Tosa</h3><p>Pacote completo para deixar o pet limpo, bonito e confortável.</p><div class="miniBtn">Agendar pacote →</div></div>
+      <div class="card service" onclick="agendar('Hidratação')"><div class="ico">✨</div><h3>Hidratação</h3><p>Cuidado especial para pelos macios, saudáveis e com brilho.</p><div class="miniBtn">Agendar hidratação →</div></div>
+      <div class="card service" onclick="agendar('Clubinho')"><div class="ico">🎾</div><h3>Clubinho</h3><p>Espaço de cuidado, socialização e atenção para seu pet.</p><div class="miniBtn">Conhecer clubinho →</div></div>
+      <div class="card service" onclick="agendar('Busca e entrega')"><div class="ico">🚗</div><h3>Busca e Entrega</h3><p>Mais praticidade para quem precisa de apoio no transporte.</p><div class="miniBtn">Solicitar busca →</div></div>
+    </div>
+  </section>
+
+  <section id="busca">
+    <div class="delivery">
+      <div>
+        <h2>Busca e entrega com localização fixa</h2>
+        <p>O cliente pode enviar endereço, ponto de referência e localização fixa pelo formulário. Assim fica mais fácil buscar e entregar o pet com segurança.</p>
+        <button class="btn btnPink" onclick="agendar('Busca e entrega')">🚗 Solicitar busca e entrega</button>
+      </div>
+      <div class="steps">
+        <div class="step">1. Cliente solicita o agendamento <small>Preenche serviço, data e horário.</small></div>
+        <div class="step">2. Informa endereço ou localização <small>Pode enviar link do Google Maps.</small></div>
+        <div class="step">3. Angels confirma pelo WhatsApp <small>Você recebe retorno da equipe.</small></div>
+      </div>
+    </div>
+  </section>
+<details class="mediaFolder" id="pasta-videos-site"><summary>🎥 Abrir pasta de vídeos</summary><div class="folderInner">
+
+
   <section id="videos">
     <div class="title"><div><h2>Vídeos Angels</h2><p>Veja vídeos, bastidores, banhos, tosas e publicações cadastradas pela equipe.</p></div></div>
     <div class="videoShowcase">
@@ -491,7 +594,9 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
       </div>
       <div id="videoMiniList" class="videoMiniList"></div>
     </div>
-  </section>
+  </section></div></details>
+<details class="mediaFolder" id="pasta-fotos-site"><summary>📸 Abrir pasta de fotos da galeria</summary><div class="folderInner">
+
 
 
   <section id="instagram">
@@ -538,7 +643,8 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
     <div class="instagramNote">
       Para colocar fotos reais do Instagram, envie os prints ou imagens das publicações. Eu substituo estes cards por fotos reais.
     </div>
-  </section>
+  </section></div></details>
+
 
   <div class="cta">
     <div>
@@ -550,7 +656,7 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
 <section id="louvores24h" class="louvorMiniSection"><div class="louvorMiniCard">
 <div class="louvorMiniHead"><div><h2>🎵 Louvor ambiente 24h</h2><p>Mini monitor com playlist de louvores do YouTube no final do site.</p></div></div>
 <div class="louvorMonitorSmall"><div class="louvorMonitorFrame"><div id="louvorPlaylistScreen" class="louvorScreenSmall"><div style="padding:22px;text-align:center"><b>Carregando playlist de louvores...</b><p style="opacity:.8">Configure a playlist no painel.</p></div></div></div><div class="louvorStandSmall"></div></div>
-<div class="louvorControls"><button class="btn btnPink" onclick="ativarSomPlaylistLouvor()">🔊 Ativar som</button><button class="btn btnLight" onclick="recarregarPlaylistLouvor()">🔄 Recarregar</button><button class="btn btnLight" onclick="abrirPlaylistLouvor()">Abrir YouTube</button></div>
+<div class="louvorControls"><button class="btn btnPink" onclick="ativarSomPlaylistLouvor()">🔊 Ativar som</button><button class="btn btnLight" onclick="recarregarPlaylistLouvor()">🔄 Recarregar</button><button class="btn btnLight smallVolBtn" onclick="baixarVolumeLouvor()">🔉 Baixar</button><span id="louvorVolumeBadge" class="louvorVolumeBadge">Volume 12%</span><button class="btn btnLight smallVolBtn" onclick="aumentarVolumeLouvor()">🔊 Aumentar</button><button class="btn btnLight" onclick="abrirPlaylistLouvor()">Abrir YouTube</button></div>
 <div id="louvorPlaylistStatus" class="louvorStatus">Aguardando configuração da playlist...</div>
 </div></section>
 </main>
@@ -1045,5 +1151,180 @@ function abrirPlaylistLouvor(){if(louvorPlaylistConfig&&louvorPlaylistConfig.lin
 function loadLouvorPlaylistConfig(){try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);firebase.firestore().collection('config').doc('louvor24h').onSnapshot(d=>{if(d.exists){louvorPlaylistConfig=d.data();renderLouvorPlaylist(true)}else louvorStatus('Nenhuma playlist configurada ainda no painel.')},e=>{console.error(e);louvorStatus('Não foi possível carregar a playlist. Verifique regras da coleção config.')})}catch(e){console.error(e);louvorStatus('Erro ao carregar playlist de louvores.')}}
 document.addEventListener('DOMContentLoaded',loadLouvorPlaylistConfig);
 </script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+/* V12.4.3 - Controle de volume baixo no mini monitor */
+let louvorPlayer = null;
+let louvorVolumePadrao = 12;
+
+function atualizarBadgeVolume(){
+  const el = document.getElementById('louvorVolumeBadge');
+  if(el) el.textContent = 'Volume ' + louvorVolumePadrao + '%';
+}
+
+function aplicarVolumeLouvor(){
+  atualizarBadgeVolume();
+  try{
+    if(louvorPlayer && typeof louvorPlayer.setVolume === 'function'){
+      louvorPlayer.setVolume(louvorVolumePadrao);
+    }
+  }catch(e){}
+}
+
+function baixarVolumeLouvor(){
+  louvorVolumePadrao = Math.max(1, louvorVolumePadrao - 3);
+  aplicarVolumeLouvor();
+}
+
+function aumentarVolumeLouvor(){
+  louvorVolumePadrao = Math.min(30, louvorVolumePadrao + 3);
+  aplicarVolumeLouvor();
+}
+
+function onYouTubeIframeAPIReady(){
+  // O player é criado depois, quando a playlist carregar.
+}
+
+function criarLouvorPlayer(mute=true){
+  const screen = document.getElementById('louvorPlaylistScreen');
+  if(!screen || !louvorPlaylistConfig) return;
+
+  louvorVolumePadrao = parseInt(louvorPlaylistConfig.volume || 12, 10);
+  if(isNaN(louvorVolumePadrao)) louvorVolumePadrao = 12;
+  louvorVolumePadrao = Math.max(1, Math.min(30, louvorVolumePadrao));
+  atualizarBadgeVolume();
+
+  screen.innerHTML = '<div id="louvorYoutubePlayer"></div>';
+
+  const vars = {
+    autoplay: 1,
+    mute: mute ? 1 : 0,
+    controls: 1,
+    rel: 0,
+    playsinline: 1
+  };
+
+  let options = {
+    height: '220',
+    width: '100%',
+    playerVars: vars,
+    events: {
+      onReady: function(event){
+        try{
+          event.target.setVolume(louvorVolumePadrao);
+          if(mute){
+            event.target.mute();
+          }else{
+            event.target.unMute();
+            event.target.setVolume(louvorVolumePadrao);
+          }
+          event.target.playVideo();
+        }catch(e){}
+      }
+    }
+  };
+
+  if(louvorPlaylistConfig.listId){
+    options.playerVars.listType = 'playlist';
+    options.playerVars.list = louvorPlaylistConfig.listId;
+    options.playerVars.loop = 1;
+  }else if(louvorPlaylistConfig.videoId){
+    options.videoId = louvorPlaylistConfig.videoId;
+  }
+
+  if(window.YT && YT.Player){
+    louvorPlayer = new YT.Player('louvorYoutubePlayer', options);
+  }else{
+    const src = louvorEmbedUrl(louvorPlaylistConfig, mute);
+    screen.innerHTML = `<iframe src="${src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  }
+
+  louvorStatus(mute ? '🔇 Playlist carregada sem som. Clique em Ativar som para tocar baixo.' : '🔊 Tocando em volume baixo: ' + louvorVolumePadrao + '%.');
+}
+
+renderLouvorPlaylist = function(mute=true){
+  if(!louvorPlaylistConfig){
+    const screen = document.getElementById('louvorPlaylistScreen');
+    if(screen) screen.innerHTML = '<div style="padding:22px;text-align:center"><b>Nenhuma playlist configurada</b><p>Cadastre uma playlist no painel.</p></div>';
+    louvorStatus('Cadastre uma playlist no painel para tocar continuamente.');
+    return;
+  }
+  criarLouvorPlayer(mute);
+};
+
+ativarSomPlaylistLouvor = function(){
+  criarLouvorPlayer(false);
+};
+
+recarregarPlaylistLouvor = function(){
+  criarLouvorPlayer(true);
+};
+</script>
+
+
+<script>
+/* V12.4.4 - Playlist diária e monitor superior com autoplay mudo */
+function seedFromDate(){
+  const d = new Date();
+  return Number(String(d.getFullYear()) + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0'));
+}
+function shuffleByDay(arr){
+  const a = [...(arr||[])];
+  let seed = seedFromDate();
+  for(let i=a.length-1;i>0;i--){
+    seed = (seed * 9301 + 49297) % 233280;
+    const j = Math.floor((seed / 233280) * (i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function renderVideoIdListInSplitMonitor(videoIds){
+  if(!videoIds || !videoIds.length) return false;
+  const ids = shuffleByDay(videoIds);
+  const frame = document.getElementById('splitVideoFrame');
+  const title = document.getElementById('splitVideoTitle');
+  const desc = document.getElementById('splitVideoDesc');
+  if(title) title.textContent = 'Louvores em vídeo';
+  if(desc) desc.textContent = 'Sequência diária automática de louvores.';
+  if(frame){
+    const first = encodeURIComponent(ids[0]);
+    const rest = ids.slice(1).map(encodeURIComponent).join(',');
+    frame.innerHTML = `<iframe src="https://www.youtube.com/embed/${first}?autoplay=1&mute=1&controls=1&rel=0&playsinline=1&playlist=${first}${rest?','+rest:''}&loop=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    return true;
+  }
+  return false;
+}
+
+// Reforça carregamento da config no mini monitor final
+if(typeof loadLouvorPlaylistConfig === 'function'){
+  const oldLoadLouvorPlaylistConfig = loadLouvorPlaylistConfig;
+  loadLouvorPlaylistConfig = function(){
+    try{
+      if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+      const dbp = firebase.firestore();
+      dbp.collection('config').doc('louvor24h').onSnapshot(doc=>{
+        if(doc.exists){
+          louvorPlaylistConfig = doc.data();
+          if(louvorPlaylistConfig.videoIds && louvorPlaylistConfig.videoIds.length){
+            louvorPlaylistConfig.videoIds = shuffleByDay(louvorPlaylistConfig.videoIds);
+            renderVideoIdListInSplitMonitor(louvorPlaylistConfig.videoIds);
+          }
+          renderLouvorPlaylist(true);
+        }else{
+          louvorStatus('Nenhuma playlist configurada ainda no painel.');
+        }
+      }, err=>{
+        console.error(err);
+        louvorStatus('Não foi possível carregar a playlist. Verifique regras da coleção config.');
+      });
+    }catch(e){
+      console.error(e);
+      oldLoadLouvorPlaylistConfig();
+    }
+  };
+}
+</script>
+
 </body>
 </html>
