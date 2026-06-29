@@ -329,6 +329,15 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
   background:linear-gradient(135deg,#fff0f7,#fff0df);
 }
 
+/* V12.4.2 mini monitor louvor */
+.ambientMusic{display:none!important}
+.louvorMiniSection{padding:34px 18px 54px}.louvorMiniCard{max-width:820px;margin:0 auto;background:linear-gradient(135deg,#fff7fb,#fff7ef);border:1px solid rgba(233,188,93,.30);border-radius:30px;box-shadow:var(--shadow),0 0 24px rgba(245,86,130,.10);padding:20px}
+.louvorMiniHead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.louvorMiniHead h2{margin:0;font-size:26px}.louvorMiniHead p{margin:6px 0 0;color:var(--muted)}
+.louvorMonitorSmall{max-width:520px;margin:0 auto}.louvorMonitorFrame{background:linear-gradient(180deg,#f8efe7,#d8b895 38%,#9f6a42);border-radius:26px;padding:10px;box-shadow:0 18px 38px rgba(68,40,24,.18),0 0 22px rgba(245,86,130,.12)}
+.louvorScreenSmall{background:#151015;border-radius:18px;overflow:hidden;min-height:205px;display:grid;place-items:center;color:white}.louvorScreenSmall iframe{width:100%;height:220px;border:0;display:block}
+.louvorStandSmall{width:90px;height:18px;margin:-1px auto 0;background:linear-gradient(180deg,#d4ab7b,#8d5f37);border-radius:0 0 18px 18px;position:relative}.louvorStandSmall:after{content:'';position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);width:130px;height:12px;border-radius:999px;background:#7b4e30}
+.louvorControls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.louvorStatus{margin-top:14px;padding:10px 12px;background:#fff7e6;border:1px solid #f2d79b;color:#7a5200;border-radius:14px;font-weight:800;font-size:13px}
+
 </style>
 </head>
 <body>
@@ -538,6 +547,12 @@ section{padding:34px 18px}.title{display:flex;justify-content:space-between;alig
     </div>
     <button class="btn btnLight" onclick="agendar()">Solicitar agendamento</button>
   </div>
+<section id="louvores24h" class="louvorMiniSection"><div class="louvorMiniCard">
+<div class="louvorMiniHead"><div><h2>🎵 Louvor ambiente 24h</h2><p>Mini monitor com playlist de louvores do YouTube no final do site.</p></div></div>
+<div class="louvorMonitorSmall"><div class="louvorMonitorFrame"><div id="louvorPlaylistScreen" class="louvorScreenSmall"><div style="padding:22px;text-align:center"><b>Carregando playlist de louvores...</b><p style="opacity:.8">Configure a playlist no painel.</p></div></div></div><div class="louvorStandSmall"></div></div>
+<div class="louvorControls"><button class="btn btnPink" onclick="ativarSomPlaylistLouvor()">🔊 Ativar som</button><button class="btn btnLight" onclick="recarregarPlaylistLouvor()">🔄 Recarregar</button><button class="btn btnLight" onclick="abrirPlaylistLouvor()">Abrir YouTube</button></div>
+<div id="louvorPlaylistStatus" class="louvorStatus">Aguardando configuração da playlist...</div>
+</div></section>
 </main>
 
 <footer class="footer">
@@ -1018,5 +1033,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 </script>
 
+<script>
+/* V12.4.2 playlist louvor final */
+let louvorPlaylistConfig=null;
+function louvorStatus(t){const e=document.getElementById('louvorPlaylistStatus');if(e)e.textContent=t}
+function louvorEmbedUrl(c,mute=true){if(!c)return'';if(c.listId)return`https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(c.listId)}&autoplay=1&mute=${mute?'1':'0'}&loop=1&controls=1&rel=0&playsinline=1`;if(c.videoId)return`https://www.youtube.com/embed/${encodeURIComponent(c.videoId)}?autoplay=1&mute=${mute?'1':'0'}&controls=1&rel=0&playsinline=1`;return''}
+function renderLouvorPlaylist(mute=true){const s=document.getElementById('louvorPlaylistScreen');if(!s)return;const src=louvorEmbedUrl(louvorPlaylistConfig,mute);if(!src){s.innerHTML='<div style="padding:22px;text-align:center"><b>Nenhuma playlist configurada</b><p>Cadastre uma playlist no painel.</p></div>';louvorStatus('Cadastre uma playlist no painel para tocar continuamente.');return}s.innerHTML=`<iframe src="${src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;louvorStatus(mute?'🔇 Playlist carregada sem som. Clique em Ativar som.':'🔊 Playlist tocando com som se o navegador permitir.')}
+function ativarSomPlaylistLouvor(){renderLouvorPlaylist(false)}
+function recarregarPlaylistLouvor(){renderLouvorPlaylist(true)}
+function abrirPlaylistLouvor(){if(louvorPlaylistConfig&&louvorPlaylistConfig.link)window.open(louvorPlaylistConfig.link,'_blank')}
+function loadLouvorPlaylistConfig(){try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);firebase.firestore().collection('config').doc('louvor24h').onSnapshot(d=>{if(d.exists){louvorPlaylistConfig=d.data();renderLouvorPlaylist(true)}else louvorStatus('Nenhuma playlist configurada ainda no painel.')},e=>{console.error(e);louvorStatus('Não foi possível carregar a playlist. Verifique regras da coleção config.')})}catch(e){console.error(e);louvorStatus('Erro ao carregar playlist de louvores.')}}
+document.addEventListener('DOMContentLoaded',loadLouvorPlaylistConfig);
+</script>
 </body>
 </html>
