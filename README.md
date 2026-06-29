@@ -1,8 +1,5 @@
-Angels Estética Animal V12.4.1 - YouTube autoplay corrigido
+Angels Estética Animal V12.4.2 - Louvor Playlist Monitor
 
-Correções:
-- Reconhece links youtube.com/watch?v=, youtu.be, shorts e embed.
-- Links com playlist e parâmetros extras usam o vídeo principal.
-- Monitor de vídeos tenta tocar YouTube embutido automaticamente sem som.
-- Louvor ambiente tenta carregar em modo silencioso ao abrir.
-- Ao clicar em Ativar / liberar som, tenta tocar com som.
+Remove player flutuante grande e adiciona mini monitor no final do site para playlist de louvores do YouTube.
+Painel salva um link de playlist em config/louvor24h.
+Atualize regras com firebase-rules-v12-4-2.txt.

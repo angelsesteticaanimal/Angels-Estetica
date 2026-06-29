@@ -154,3 +154,16 @@
     bind();
   }
 })();
+
+
+(function(){
+function msg(t,m){const e=document.getElementById("playlistMsg");if(e){e.className=m||"";e.textContent=t}}
+function db(){if(typeof firebase==="undefined")throw new Error("Firebase não carregou.");if(!firebase.apps.length)firebase.initializeApp(firebaseConfigMidias||firebaseConfig);return firebase.firestore()}
+function val(id){return(document.getElementById(id)?.value||"").trim()}
+function listId(u){let m=String(u||"").replace(/&amp;/g,"&").match(/[?&]list=([^&]+)/);return m?m[1]:""}
+function vidId(u){let s=String(u||"").replace(/&amp;/g,"&");let m=s.match(/[?&]v=([^&]+)/)||s.match(/youtu\.be\/([^?&/]+)/)||s.match(/youtube\.com\/shorts\/([^?&/]+)/);return m?m[1]:""}
+async function salvar(){try{const link=val("playlistLouvorLink"),titulo=val("playlistLouvorTitulo")||"Louvores Angels 24h";if(!link)throw new Error("Cole um link de playlist ou vídeo.");const l=listId(link),v=vidId(link);if(!l&&!v)throw new Error("Não encontrei ID de playlist ou vídeo.");await db().collection("config").doc("louvor24h").set({titulo,link,listId:l,videoId:v,updatedAt:new Date().toISOString()});msg("✅ Playlist salva. Abra o site público e atualize com Ctrl+F5.","ok")}catch(e){console.error(e);msg("❌ Não salvou: "+(e.message||e),"err")}}
+function testar(){const link=val("playlistLouvorLink"),l=listId(link),v=vidId(link);let url=l?"https://www.youtube.com/embed/videoseries?list="+encodeURIComponent(l)+"&autoplay=1&mute=1&loop=1&controls=1&rel=0&playsinline=1":v?"https://www.youtube.com/embed/"+encodeURIComponent(v)+"?autoplay=1&mute=1&controls=1&rel=0&playsinline=1":"";if(url)window.open(url,"_blank");else msg("Cole um link válido para testar.","err")}
+function bind(){let a=document.getElementById("btnSalvarPlaylistLouvor"),b=document.getElementById("btnTestarPlaylistLouvor");if(a)a.onclick=salvar;if(b)b.onclick=testar}
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",bind):bind()
+})();
