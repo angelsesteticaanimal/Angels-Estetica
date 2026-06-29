@@ -895,5 +895,18 @@ function scheduleAmbient24h(){
 document.addEventListener('DOMContentLoaded', scheduleAmbient24h);
 </script>
 
+
+<script>
+/* V12.3.8 - Carregamento público robusto sem orderBy */
+function sortPublicDateDesc(arr){return(arr||[]).sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||'')));}
+function reloadPublicMediaNoOrder(){try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);const dbFix=firebase.firestore();
+if(document.getElementById('galleryGrid')){dbFix.collection('galeria').limit(24).onSnapshot(snap=>{const arr=[];snap.forEach(doc=>arr.push({id:doc.id,...doc.data()}));const sorted=sortPublicDateDesc(arr);if(sorted.length&&typeof postCard==='function'){document.getElementById('galleryGrid').innerHTML=sorted.map(postCard).join('');const note=document.getElementById('galleryLoadNote');if(note)note.textContent='✅ Fotos carregadas do painel.';}},err=>console.error('galeria public',err));}
+if(typeof splitPhotos!=='undefined'){dbFix.collection('galeria').limit(24).onSnapshot(snap=>{splitPhotos=[];snap.forEach(doc=>splitPhotos.push({id:doc.id,...doc.data()}));splitPhotos=sortPublicDateDesc(splitPhotos);if(typeof startPhotoSlide==='function')startPhotoSlide();if(typeof renderMediaMiniStrip==='function')renderMediaMiniStrip();},err=>console.error('split galeria',err));}
+if(typeof splitVideos!=='undefined'){dbFix.collection('videos').limit(24).onSnapshot(snap=>{splitVideos=[];snap.forEach(doc=>splitVideos.push({id:doc.id,...doc.data()}));splitVideos=sortPublicDateDesc(splitVideos);const note=document.getElementById('splitVideoNote');if(splitVideos.length){if(note)note.textContent='✅ Vídeos carregados do painel.';if(typeof startSplitVideoRotation==='function')startSplitVideoRotation();}if(typeof renderMediaMiniStrip==='function')renderMediaMiniStrip();},err=>console.error('split videos',err));}
+if(typeof ambientLouvores!=='undefined'){dbFix.collection('louvores').limit(50).onSnapshot(snap=>{ambientLouvores=[];snap.forEach(doc=>{const item={id:doc.id,...doc.data()};if(item.ativo!==false)ambientLouvores.push(item);});ambientLouvores=sortPublicDateDesc(ambientLouvores);if(typeof updateAmbientTitle==='function')updateAmbientTitle();},err=>console.error('louvores public',err));}
+}catch(e){console.error(e);}}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(reloadPublicMediaNoOrder,1200));
+</script>
+
 </body>
 </html>
