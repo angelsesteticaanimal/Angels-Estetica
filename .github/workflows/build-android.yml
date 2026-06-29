@@ -57,6 +57,6 @@ jobs:
       - name: Salvar APK gerado
         uses: actions/upload-artifact@v4
         with:
-          name: Angels-Estetica-Animal-V12-4-0-Debug-Externo-APK
+          name: Angels-Estetica-Animal-V12-4-1-YouTube-Autoplay-Corrigido-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
