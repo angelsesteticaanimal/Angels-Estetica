@@ -1,24 +1,19 @@
-# Angels Platform V13.1 — Fundação Profissional
+# Angels Platform V14
 
-## Endereços após publicar no GitHub Pages
+Estrutura limpa e separada:
 
-- Domínio principal: `/` → redireciona para `/site/`
-- Site institucional: `/site/`
-- Painel administrativo: `/painel/`
-- Área do cliente: `/cliente/`
+- `/` — site institucional
+- `/painel/` — painel administrativo
+- `/cliente/` — área do cliente
+- `/firebase/` — regras e configurações
+- `/docs/` — documentação
 
-## O que esta entrega contém
+## Endereços
 
-- Site institucional premium totalmente novo.
-- Painel operacional preservado em pasta separada.
-- Área do cliente preservada em pasta separada.
-- Estrutura preparada para Firebase, Diário do Pet e CMS.
-- Design responsivo para celular e computador.
-- Sem os antigos monitores no site público.
+- Site: `https://angelsesteticaanimal.com.br/`
+- Painel: `https://angelsesteticaanimal.com.br/painel/`
+- Cliente: `https://angelsesteticaanimal.com.br/cliente/`
 
-## Próxima etapa recomendada
+## Atenção
 
-1. Confirmar publicação e navegação dos três módulos.
-2. Integrar galeria e avaliações ao Firebase.
-3. Criar login e Diário do Pet funcional.
-4. Proteger o painel com autenticação.
+As regras do Firestore continuam abertas para testes. Antes da produção, implemente autenticação e regras restritas.
